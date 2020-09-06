@@ -22,12 +22,19 @@ platform :ios do
   end
 
   lane :test do 
-    scan(scheme:"github-actions-test", devices: ["iPhone 8"], include_simulator_logs: false, clean: "true", skip_slack: true)
+    scan(scheme:"github-actions-test", devices: ["iPhone X"], include_simulator_logs: false, clean: "true", skip_slack: true)
   end
 
 
   lane :build do
     # pretend to have something different here
-    scan(scheme:"github-actions-test", devices: ["iPhone 8"], include_simulator_logs: false, clean: "true", skip_slack: true)
+    # scan(scheme:"github-actions-test", devices: ["iPhone 8"], include_simulator_logs: false, clean: "true", skip_slack: true)
+    xcodebuild(
+      scheme: "github-actions-test",
+      configuration: "Debug",
+      clean: true,
+      build: true,
+      destination: "generic/platform=iOS\" CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=\""
+    )
   end
 end
